@@ -1,0 +1,88 @@
+**C++**
+class Solution {
+public:
+    vector<int> shortestToChar(string s, char c) {
+        int l = s.length();
+        int last_e = -1;
+        vector<int> res(l, 0);
+        
+        for(int i = 0; i < l; i++)
+        {
+            if(s[i] == c)
+            {
+                last_e = i;
+            }
+            if(last_e != -1)
+            {
+                res[i] = i - last_e;
+            }
+        }
+        
+        for(int j = last_e; j >= 0; j--)
+        {
+            if(s[j] == c)
+            {
+                last_e = j;
+            }
+            res[j] = res[j] == 0 ? last_e - j : min(res[j], last_e - j);
+        }
+        
+        return res;
+    }
+};
+
+**Python**
+class Solution:
+    def shortestToChar(self, s: str, c: str) -> List[int]:
+        l = len(s)
+        last = -1
+        res = [0] * l
+        
+        for i in range(l):
+            if s[i] == c:
+                last = i
+             
+            if last != -1:
+                res[i] = i - last
+                
+         
+        for i in reversed(range(last)):
+            if s[i] == c:
+                last = i
+                
+            res[i] = last - i if res[i] == 0 else min(last - i, res[i])
+            
+        return res  
+
+**C#**
+public class Solution {
+    public int[] ShortestToChar(string s, char c) {
+        
+        int l = s.Length;
+        int[] res = new int[l];
+        int last = -1;
+        
+        for(int i = 0; i < l; i++){ res[i] = 0; }
+        
+        for(int i = 0; i < l; i++)
+        {
+            if(s[i] == c) last = i;
+            
+            if(last != -1)
+            {
+                res[i] = i - last;
+            }            
+            
+        }
+        
+        
+        for(int i = last; i >= 0; i--)
+        {
+            if(s[i] == c) last = i;
+            res[i] = res[i] == 0 ? last - i : Math.Min(last - i, res[i]);
+            
+        }
+        
+        return res;
+    }
+}
