@@ -1,0 +1,46 @@
+#include <vector>
+using namespace std;
+
+vector<int> buildSequenceArray(vector<int> array, vector<int> sequences, int curIdx)
+{
+		vector<int> sequence;
+		while(curIdx != -1)
+		{
+			sequence.push_back(array[curIdx]);
+			curIdx = sequences[curIdx];
+		}
+	reverse(sequence.begin(), sequence.end());
+	return sequence;
+}
+
+vector<vector<int>> maxSumIncreasingSubsequence(vector<int> array) {
+	
+	vector<int> sequences(array.size(), -1);
+	vector<int> sums = array;
+	int maxIdx = 0;	
+	
+	for(int i = 0; i < array.size(); i++)
+	{
+			int curNum = array[i];
+		
+		for(int j = 0; j < i; j++)
+		{
+				int otherNum = array[j];
+			
+				if(otherNum < curNum && sums[j] + curNum > sums[i])
+				{
+						sums[i] = sums[j] + curNum;
+						sequences[i] = j;
+				}			
+		}
+		
+		if(sums[i] > sums[maxIdx])
+		{
+			maxIdx = i;
+		}			
+		
+	}
+	
+	return {{sums[maxIdx]}, buildSequenceArray(array, sequences, maxIdx)};
+	
+}
