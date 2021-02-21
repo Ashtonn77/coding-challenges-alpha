@@ -1,0 +1,59 @@
+import java.util.*;
+
+class Program {
+  public static List<Character> longestCommonSubsequence(String str1, String str2) {
+    
+		String[][] res = new String[str1.length()+1][str2.length()+1];
+		
+		for(int i = 0; i <= str1.length(); i++)
+		{
+			res[i][0] = "";
+		}
+		for(int j = 0; j <= str2.length(); j++)
+		{
+				res[0][j] = "";
+		}
+		
+		for(int i = 1; i <= str1.length(); i++)
+		{
+				for(int j = 1; j <= str2.length(); j++)
+				{
+					
+					if(str1.charAt(i - 1) == str2.charAt(j - 1))
+					{
+							res[i][j] = res[i - 1][j - 1] + str1.charAt(i - 1); 
+						  
+					}
+					else
+					{
+						String x = "";
+						if(res[i][j - 1].length() > res[i - 1][j].length())
+						{
+							x = res[i][j - 1];
+						}
+						else
+						{
+							x = res[i - 1][j];
+						}
+						
+						res[i][j] = x;
+					}
+					
+				}				
+			
+		}
+		
+		
+		String ans = res[str1.length()][str2.length()];		
+		
+		List<Character> arr = new ArrayList<>();
+		
+		 for (char ch : ans.toCharArray()) { 
+  
+            arr.add(ch); 
+        }
+		
+		return arr;
+		
+  }
+}
