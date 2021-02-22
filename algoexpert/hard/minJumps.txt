@@ -1,0 +1,29 @@
+using System;
+
+public class Program {
+	public static int MinNumberOfJumps(int[] array) {
+		int b = array.Length;
+		int[] jumps = new int[b];
+		for(int i = 0; i < array.Length; i++){jumps[i] = Int32.MaxValue; }
+		jumps[0] = 0;
+		
+		
+		for(int i = 1; i < array.Length; i++)
+		{
+				
+				for(int j = 0; j < i; j++)
+				{
+					
+						if(array[j] + j >= i)
+						{
+							jumps[i] = Math.Min(jumps[i], jumps[j] + 1);
+						}
+					
+				}
+			
+			
+		}
+		
+		return jumps[b-1];
+	}
+}
