@@ -1,0 +1,34 @@
+import java.util.*;
+
+class Program {
+  public static int waterArea(int[] heights) {
+		
+		int _l = heights.length;
+		
+		if(_l < 3) return 0;
+		
+		int[] left = new int[_l];
+		int[] right = new int[_l];
+		
+		int sum = 0;
+		
+		left[0] = heights[0];
+		right[_l - 1] = heights[_l - 1];
+		
+		for(int i = 1; i < _l; i++)
+			left[i] = Math.max(heights[i], left[i - 1]);
+		
+		for(int i = _l - 2; i >= 0; i--)
+			right[i] = Math.max(heights[i], right[i + 1]);
+		
+		
+		for(int i = 0; i < _l; i++)
+		{
+			int mn = Math.min(left[i], right[i]);
+		  sum += (mn - heights[i]);
+		}
+		
+		return sum;
+		
+  }
+}
