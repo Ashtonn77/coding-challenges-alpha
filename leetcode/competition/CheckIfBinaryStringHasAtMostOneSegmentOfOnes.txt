@@ -1,0 +1,43 @@
+class Solution {
+    public boolean checkOnesSegment(String s) {
+
+        int ones = 0;        
+        for(int i = 0; i < s.length(); i++) {
+            
+            if(s.charAt(i) == '1')
+                ones++;
+            
+        }
+        
+        if(ones == 1 || ones == s.length())
+            return true;
+        
+        if(ones == 0)
+            return false;
+        
+        int pairNum = 0;
+        
+        for(int i = 0; i < s.length(); i++) {
+            
+            if(s.charAt(i) == '1') {
+                
+                int j = i;
+                while(j < s.length()) {
+                    if(s.charAt(j) != '1')
+                        break;
+                    pairNum++;
+                    j++;                    
+                }
+                
+                break;
+            }
+            
+        }
+        
+        if(pairNum != ones)
+            return false;
+        
+        return true;
+        
+    }
+}
