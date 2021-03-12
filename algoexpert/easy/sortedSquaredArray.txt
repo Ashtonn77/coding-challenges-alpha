@@ -1,0 +1,30 @@
+import java.util.*;
+import java.lang.Math;
+
+class Program {
+
+  public int[] sortedSquaredArray(int[] array) {
+		
+		int[] out = new int[array.length];
+		
+		int i = 0;
+		int j = array.length-1;
+		
+		int curPos = j;
+		
+		while(i <= j){
+			
+			if(Math.abs(array[j]) > Math.abs(array[i])){				
+				out[curPos--] = array[j] * array[j];
+				j--;
+			}
+			else{
+				out[curPos--] = array[i] * array[i];
+				i++;
+			}
+			
+		}
+		
+    return out;
+  }
+}
