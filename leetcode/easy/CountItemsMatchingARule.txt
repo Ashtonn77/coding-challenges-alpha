@@ -1,0 +1,39 @@
+**Java**
+```
+class Solution {
+    public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
+        
+        int c = 0;
+        int index = (ruleKey.equals("type")) ? 0 : (ruleKey.equals("color")) ? 1 : 2;
+      
+        for(var arr : items){
+            
+            if(arr.get(index).equals(ruleValue))
+                c++;
+            
+        }
+        
+        return c;
+        
+    }
+}
+```
+**C#**
+```
+public class Solution {
+    public int CountMatches(IList<IList<string>> items, string ruleKey, string ruleValue) {
+        
+        int c = 0;
+        int index = ruleKey == "type" ? 0 : ruleKey == "color" ? 1 : 2;
+      
+        foreach(var arr in items){
+            
+            if(arr[index] == ruleValue)
+                c++;
+            
+        }
+        
+        return c;
+        
+    }
+}
