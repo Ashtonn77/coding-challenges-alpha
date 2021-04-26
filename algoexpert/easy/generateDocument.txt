@@ -1,0 +1,44 @@
+import java.util.*;
+
+class Program {
+
+  public boolean generateDocument(String characters, String document) {
+    
+		Map<Character, Integer> map = new LinkedHashMap<>();
+		
+		for(int i = 0; i < document.length(); i++){
+			
+			char ch = document.charAt(i);
+			
+			if(map.containsKey(ch)){
+				map.put(ch, map.get(ch) + 1);
+			}else{
+				map.put(ch, 1);
+			}
+			
+			
+		}
+		
+		for(int i = 0; i < characters.length(); i++){
+			
+			char ch = characters.charAt(i);
+			if(map.containsKey(ch)){
+				map.put(ch, map.get(ch) -1);
+			}
+			
+		}
+		
+		Set<Character> keys = map.keySet();
+		
+		for(var key : keys){
+			
+			if(map.get(key) > 0)
+				return false;
+			
+		}
+		
+		return true;
+		
+			
+  }
+}
