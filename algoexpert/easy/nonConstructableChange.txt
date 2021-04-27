@@ -1,0 +1,25 @@
+import java.util.*;
+
+class Program {
+
+  public int nonConstructibleChange(int[] coins) {
+		
+		if(coins.length == 0) return 1;
+		
+    int sum = 0;
+		
+		Arrays.sort(coins);
+		sum += coins[0];
+		
+		for(int i = 1; i < coins.length; i++){
+			
+			if(coins[i] > sum + 1)
+				return sum + 1;
+			sum += coins[i];
+			
+		}
+		
+		return coins[0] > 1 ? 1 : sum + 1;
+		
+  }
+}
