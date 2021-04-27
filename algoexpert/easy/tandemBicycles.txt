@@ -1,0 +1,32 @@
+import java.util.*;
+
+class Program {
+
+  public int tandemBicycle(int[] redShirtSpeeds, int[] blueShirtSpeeds, boolean fastest) {
+    
+		Arrays.sort(redShirtSpeeds);
+		if(fastest){
+			blueShirtSpeeds = Arrays.stream(blueShirtSpeeds)
+			.boxed()
+			.sorted((i, j) -> j - i)
+			.mapToInt(Integer::intValue)
+			.toArray();
+		}else{
+			Arrays.sort(blueShirtSpeeds);
+		}
+		
+		int sum = 0;
+		
+		for(int i = 0; i < redShirtSpeeds.length; i++){
+			
+				int num = Math.max(redShirtSpeeds[i], blueShirtSpeeds[i]);				
+
+				sum += num;
+			
+		}
+		
+		return sum;
+		
+		
+  }
+}
