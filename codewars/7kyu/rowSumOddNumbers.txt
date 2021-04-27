@@ -1,0 +1,23 @@
+class RowSumOddNumbers {
+    public static int rowSumOddNumbers(int n) {
+     
+      if(n == 1) return 1;
+      int left = 1;
+      int acc = 2;
+      
+      for(int i = 1; i < n; i++){
+        left += acc;
+        acc += 2;
+      }
+      
+      int sum = left;
+      
+      for(int i = 1; i < n; i++){
+        left += 2;
+        sum += left;
+      }
+      
+      return sum;
+      
+    }
+}
