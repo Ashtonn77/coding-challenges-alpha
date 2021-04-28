@@ -1,0 +1,12 @@
+public class Kata {
+    public static int findShort(String s) {
+        String[] words = s.split(" ");
+        int mn = Integer.MAX_VALUE;
+      
+        for(var word : words){
+         mn = Math.min(mn, word.length());
+        }
+      
+      return mn;
+    }
+}
