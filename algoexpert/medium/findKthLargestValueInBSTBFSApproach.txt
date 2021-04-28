@@ -1,0 +1,41 @@
+import java.util.*;
+
+class Program {
+  // This is an input class. Do not edit.
+  static class BST {
+    public int value;
+    public BST left = null;
+    public BST right = null;
+
+    public BST(int value) {
+      this.value = value;
+    }
+  }
+
+  public int findKthLargestValueInBst(BST tree, int k) {
+    
+		Queue<BST> q = new LinkedList<>();
+		q.add(tree);
+		List<Integer> list = new ArrayList<>();
+		
+		while(q.size() > 0){
+			
+			BST root = q.remove();
+			list.add(root.value);
+			
+			if(root.left != null){
+				q.add(root.left);
+			}
+			
+			if(root.right != null){
+				q.add(root.right);
+			}
+			
+		}
+		
+		
+		Collections.sort(list, (a, b) -> b - a);
+		
+    return list.get(k - 1);
+  }
+}
