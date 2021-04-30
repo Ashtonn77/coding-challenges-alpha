@@ -1,0 +1,73 @@
+import java.util.*;
+
+public class Line {
+  public static String Tickets(int[] peopleInLine)
+  {
+      
+    int twentyFive = 0;
+    int fifty = 0;
+    
+    for(var el :  peopleInLine){
+      
+      System.out.println(el);
+      if(el == 25){
+        
+        twentyFive += 25;
+        
+      }else if(el == 50){
+        
+        if(twentyFive < 25){
+          return "NO";
+        }
+        
+        twentyFive -= 25;
+        fifty += 50;
+        
+        
+      }else if(el == 100){
+        
+        if(twentyFive < 25){
+          return "NO";
+        }else if(fifty < 50){
+          
+          if(twentyFive < 75){
+            
+            return "NO";
+          }
+          
+          twentyFive -= 75;
+          
+        }else {
+          
+          twentyFive -= 25;
+          fifty -= 50;
+          
+        }
+        
+     
+        
+      }
+     
+      
+      
+    }
+    
+    return "YES";
+    
+    
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
