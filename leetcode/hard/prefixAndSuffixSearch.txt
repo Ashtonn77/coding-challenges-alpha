@@ -1,0 +1,45 @@
+class WordFilter {
+
+    String[] words = {};
+    Map<String, Integer> map = new HashMap<>();
+    Set<String> keys;
+    
+    public WordFilter(String[] words) {
+        this.words = words;
+        int idx = 0;
+        
+        for(var word : this.words){
+            
+            map.put(word, idx++);
+            
+        }
+        
+        keys = map.keySet();
+    }
+    
+    public int f(String p, String s) {
+       
+       int k = Integer.MIN_VALUE;
+        
+       for(var key : keys){
+           
+           if(key.startsWith(p) && key.endsWith(s)){
+               
+               if(map.get(key) > k)
+                k = map.get(key);
+               
+               
+           }
+           
+       } 
+        
+       return k;
+
+    }
+}
+
+/**
+ * Your WordFilter object will be instantiated and called as such:
+ * WordFilter obj = new WordFilter(words);
+ * int param_1 = obj.f(prefix,suffix);
+ */
