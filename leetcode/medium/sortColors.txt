@@ -1,0 +1,29 @@
+
+**Dutch flag sort**
+**Three pointers**
+
+class Solution {
+    public void sortColors(int[] nums) {
+        
+       int i = 0, j = 0, k = nums.length -1;
+        while(j <= k){
+            
+            int n = nums[j];
+            if(n == 0){
+                swap(nums, j++, i++);
+            }else if(n == 1) j++;
+            else
+                swap(nums, k--, j);
+            
+            
+        }
+        
+    }
+    
+    void swap(int[] nums, int p, int q){
+        int t = nums[p];
+        nums[p] = nums[q];
+        nums[q] = t;
+    }
+    
+}
