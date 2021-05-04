@@ -1,0 +1,10 @@
+class Solution {
+    public int singleNumber(int[] nums) {
+        int sm = 0;
+        for(var num : nums){
+            sm ^= num;
+        }
+        
+        return sm;
+    }
+}
