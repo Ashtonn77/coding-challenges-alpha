@@ -1,0 +1,22 @@
+public class Max {
+  public static int sequence(int[] arr) {
+    
+        int l = arr.length;
+    
+        if(l < 1 || arr == null) return 0;
+    
+        int[] res = new int[l];
+
+        res[0] = arr[0];
+        int mx = res[0];
+
+        for(int i = 1; i < l; i++){
+
+            res[i] = Math.max(arr[i], arr[i] + res[i - 1]);
+            mx = Math.max(mx, res[i]);
+
+        }
+
+        return mx < 0 ? 0 : mx;
+  }
+}
