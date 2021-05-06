@@ -1,0 +1,48 @@
+import java.util.*;
+
+class Program {
+  // This is an input class. Do not edit.
+  public static class LinkedList {
+    public int value;
+    public LinkedList next;
+
+    public LinkedList(int value) {
+      this.value = value;
+      this.next = null;
+    }
+  }
+
+  public LinkedList sumOfLinkedLists(LinkedList l1, LinkedList l2) {
+				
+			LinkedList node_1 = l1;
+			LinkedList node_2 = l2;
+			LinkedList dummy = new LinkedList(0);
+			LinkedList currentNode = dummy;
+			
+			int carry = 0;
+			int remainder = 0;
+		
+			while(node_1 != null || node_2 != null || carry != 0){
+				
+				int v1 = (node_1 != null) ? node_1.value : 0;
+				int v2 = (node_2 != null) ? node_2.value : 0;
+				
+				int sm = v1 + v2 + carry;
+				remainder = sm % 10;
+				carry = sm / 10;
+				
+				LinkedList newNode = new LinkedList(remainder);
+				currentNode.next = newNode;
+				currentNode = currentNode.next;
+				
+				
+				node_1 = (node_1 != null) ? node_1.next : node_1;
+				node_2 = (node_2 != null) ? node_2.next : node_2;
+			
+			}
+		
+		
+			return dummy.next;
+		
+  }
+}
