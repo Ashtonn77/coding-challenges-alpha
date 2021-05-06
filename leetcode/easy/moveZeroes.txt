@@ -1,0 +1,37 @@
+class Solution {
+    public void moveZeroes(int[] nums) {
+        
+       int i = 0, j = 0;
+       int _l = nums.length;
+       
+       while(i < _l){
+           if(nums[i] == 0)
+               break;
+           i++;
+       } 
+        
+       j = i + 1;
+       if(j == _l) return;
+        
+       while(i < _l && j < _l){
+           
+           if(nums[i] == 0 && nums[j] != 0)
+               swap(nums, i, j);
+           else if(nums[i] != 0)
+               i++;
+           else if(nums[j] == 0)
+               j++;
+           
+       } 
+        
+    }
+    
+   void swap(int[] arr, int i, int j){
+
+        int t = arr[i];
+        arr[i] = arr[j];
+        arr[j] = t;
+
+    }
+    
+}
