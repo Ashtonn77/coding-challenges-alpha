@@ -1,0 +1,50 @@
+class Solution {
+    
+    
+    public String countAndSay(int n) {
+       
+        return helper("1", n);
+               
+    }
+    
+    String helper(String num, int n){
+        
+        if(n <= 1) return num;
+            
+        int cnt = 1;
+        char prev = num.charAt(0);
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1; i < num.length(); i++){
+            
+            char current = num.charAt(i);
+            if(current != prev){
+                
+                sb.append(cnt).append(prev);
+                prev = current;
+                cnt = 1;
+                
+            }else{
+                cnt++;
+            }
+           
+        }
+        sb.append(cnt).append(prev);
+            
+        return helper(sb.toString(), n - 1);
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
