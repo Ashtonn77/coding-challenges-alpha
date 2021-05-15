@@ -1,0 +1,27 @@
+class Solution {
+    public int[] memLeak(int memory1, int memory2) {
+ 
+        int[] out = {0, memory1, memory2};
+
+        int i = 1;
+        while(true){
+
+            if(i > out[1] && i > out[2])
+                break;
+
+            if(out[1] >= out[2])
+                out[1] -= i;
+            else{
+                out[2] -= i;
+            }
+
+            i++;
+
+        }
+
+        out[0] = i;
+
+        return out;      
+        
+    }
+}
