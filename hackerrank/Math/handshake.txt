@@ -1,0 +1,15 @@
+public static int handshake(int n) {
+        
+        int[] out = new int[n + 1];
+        out[0] = 0;
+        out[1] = 0;
+        
+        int x = 1;
+        
+        for(int i = 2; i <= n; i++){
+            out[i] = out[i - 1] + x;
+            x++;
+        }
+        return out[n];
+
+    }
