@@ -1,0 +1,13 @@
+    public static int connectingTowns(int n, List<Integer> routes) {
+        
+        BigDecimal bg = new BigDecimal("1");
+        for(int i = 0; i < n - 1; i++){
+          
+             bg = bg.multiply(new BigDecimal(String.valueOf(routes.get(i))));
+           
+        }
+        
+        bg = bg.remainder(new BigDecimal("1234567"));
+        
+        return Integer.parseInt(bg.toString());
+    }
