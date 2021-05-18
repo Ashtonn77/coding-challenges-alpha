@@ -1,0 +1,45 @@
+public static List<Integer> longestCommonSubsequence(List<Integer> a, List<Integer> b) {
+        
+        List<Integer> res = new ArrayList<>();
+        String[][] out = new String[a.size() + 1][b.size() + 1];
+                       
+        for(int i = 0; i <= a.size(); i++)
+            out[i][0] = "";
+
+        for(int i = 0; i <= b.size(); i++)
+            out[0][i] = "";
+            
+        
+        for(int i = 1; i <= a.size(); i++){
+            
+            for(int j = 1; j <= b.size(); j++){
+                
+                int _a = a.get(i - 1);
+                int _b = b.get(j - 1);
+                
+                if(_a == _b){
+                    out[i][j] = out[i - 1][j - 1] + "," + String.valueOf(_a); 
+                }else{
+                    String _x = "";
+                    if(out[i][j - 1].length() > out[i - 1][j].length())
+                        _x = out[i][j - 1];
+                    else
+                        _x = out[i - 1][j];
+                        
+                    out[i][j] = _x;        
+                }                
+                
+            }
+            
+        }    
+            
+        String temp = out[a.size()][b.size()];
+        String[] sample = temp.split(",");
+        
+        for(String num : sample)
+            if(num.length() > 0)
+                res.add(Integer.valueOf(num));
+                
+        return res;            
+         
+    }
