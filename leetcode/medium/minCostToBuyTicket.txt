@@ -1,0 +1,32 @@
+class Solution {
+    public int mincostTickets(int[] days, int[] costs) {
+        
+        int _l = days.length, _k = 0;
+        int[] totalCosts = new int[days[_l - 1] + 1];
+        Map<Integer, Boolean> daysPresent = new HashMap<>();
+        
+        for(int day : days)
+            daysPresent.put(day, true);
+        
+        _k = totalCosts.length;
+        
+        for(int i = 1; i < _k; i++){
+            
+            if(!daysPresent.containsKey(i)){
+                totalCosts[i] = totalCosts[i - 1];
+                continue;
+            }
+            
+            int one = totalCosts[i - 1] + costs[0];
+            int seven = i - 7 < 0 ? costs[1] : totalCosts[i - 7] + costs[1];
+            int thirty = i - 30 < 0 ? costs[2] : totalCosts[i - 30] + costs[2];
+            
+            int min = Math.min(one, seven);
+            totalCosts[i] = Math.min(min, thirty);                        
+            
+        }
+        
+        return totalCosts[_k - 1];
+        
+    }
+}
