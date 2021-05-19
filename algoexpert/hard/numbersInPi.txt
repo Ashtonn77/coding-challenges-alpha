@@ -1,0 +1,50 @@
+import java.util.*;
+
+class Program {
+  public static int numbersInPi(String pi, String[] numbers) {
+    
+		Map<String, Boolean> map = new HashMap<>();
+		Map<Integer, Integer> cache = new HashMap<>();
+		
+		for(String num : numbers)
+			map.put(num, true);
+		
+		int minSpaces = getMinSpaces(pi, map, cache, 0);
+				
+    return minSpaces == Integer.MAX_VALUE ? -1 : minSpaces;
+  }
+	
+	
+	static int getMinSpaces(String pi, Map<String, Boolean> map, Map<Integer, Integer> cache, int idx){
+		
+		if(idx == pi.length()) return -1;
+		
+		if(cache.containsKey(idx)) return cache.get(idx);
+		
+		int minSpaces = Integer.MAX_VALUE;
+		
+		for(int i = idx; i < pi.length(); i++){
+			
+			String prefix = pi.substring(idx, i + 1);
+			
+			if(map.containsKey(prefix)){
+				
+				int minSpacesInSuffix = getMinSpaces(pi, map, cache, i + 1);
+				
+				if(minSpacesInSuffix == Integer.MAX_VALUE)
+					minSpaces = Math.min(minSpaces, minSpacesInSuffix);
+				else
+					minSpaces = Math.min(minSpaces, minSpacesInSuffix + 1);
+				
+			}
+			
+			
+		}
+		
+		cache.put(idx, minSpaces);
+		return cache.get(idx);
+		
+	}
+	
+	
+}
