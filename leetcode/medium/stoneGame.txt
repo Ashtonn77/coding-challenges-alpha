@@ -1,0 +1,19 @@
+class Solution {
+    public boolean stoneGame(int[] piles) {
+        
+        Arrays.sort(piles);
+        int alex = 0, lee = 0;
+        
+        int i = piles.length -1;
+        int j = i - 1;
+        
+        while(j >= 0){
+            
+            alex += piles[i--];
+            lee += piles[j--];
+            
+        }
+        
+        return alex > lee;
+    }
+}
