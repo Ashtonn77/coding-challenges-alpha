@@ -1,0 +1,49 @@
+public class Solution {
+    public static String lcs(String x, String y) {
+        
+        int _l = x.length();
+        int _k = y.length();
+      
+        String[][] out = new String[_l + 1][_k + 1];
+      
+        for(int i = 0; i <= _l; i++)
+          out[i][0] = "";
+      
+        for(int j = 0; j <= _k; j++)
+          out[0][j] = "";
+      
+      
+        for(int i = 1; i <= _l; i++){
+          
+          
+          for(int j = 1; j <= _k; j++){
+            
+              char a = x.charAt(i - 1);
+              char b = y.charAt(j - 1);
+            
+              if(a == b){
+                
+                out[i][j] = out[i - 1][j - 1] + a;
+                
+              }else{
+                
+                String _x = "";
+                if(out[i][j - 1].length() > out[i - 1][j].length())
+                  _x = out[i][j - 1];
+                else
+                  _x = out[i - 1][j];
+                
+                out[i][j] = _x;              
+                
+              }
+            
+            
+          }
+          
+          
+        }
+      
+      return out[_l][_k];
+      
+    }
+}
