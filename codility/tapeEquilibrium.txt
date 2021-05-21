@@ -1,0 +1,28 @@
+class Solution {
+    public int solution(int[] A) {
+        
+        int _l = A.length;
+
+        int sum_a = A[0];
+        int sum_b = 0;
+
+        for(int i = 1; i < _l; i++)
+            sum_b += A[i];
+
+        int difference = Math.abs(sum_a - sum_b);
+
+        for(int i = 1; i < _l - 1; i++){
+
+            sum_a += A[i];
+            sum_b -= A[i];
+
+            int temp = Math.abs(sum_b - sum_a);
+
+            difference = temp < difference ? temp : difference;
+
+        }    
+
+        return difference;
+
+    }
+}
