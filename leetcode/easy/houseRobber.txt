@@ -1,0 +1,22 @@
+class Solution {
+    public int rob(int[] nums) {
+        
+        int _l = nums.length;
+        int first = nums[0];        
+        if(_l == 1) return first;        
+        int second = Math.max(nums[0], nums[1]);
+        if(_l == 2) return second;
+        
+        int temp = 0;
+        for(int i = 2; i < _l; i++){
+            
+            temp = Math.max(second, nums[i] + first);
+            first = second;
+            second = temp;
+            
+        }
+     
+        return temp;
+        
+    }
+}
