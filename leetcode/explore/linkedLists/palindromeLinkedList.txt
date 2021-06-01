@@ -1,0 +1,16 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+         
+        StringBuilder sb = new StringBuilder();
+        while(head != null){
+            sb.append(head.val);
+            head = head.next;
+        }
+        
+        String rev = sb.toString();
+        return rev.equals(sb.reverse().toString());        
+        
+    }
+ 
+    
+}
