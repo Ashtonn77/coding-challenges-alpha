@@ -1,0 +1,30 @@
+class Solution {
+    public int numMatchingSubseq(String s, String[] words) {
+        
+        int count = 0;        
+        
+        for(String word : words){
+            
+            boolean isValid = true;
+            int index = -1;
+            
+            for(char ch : word.toCharArray()){
+                
+                index = s.indexOf(ch, index + 1);
+                if(index == -1){
+                    
+                    isValid = false;
+                    
+                }
+                
+                
+            }
+            
+            count = isValid ? count + 1 : count;
+            
+        }
+        
+        return count;
+        
+    }
+}
