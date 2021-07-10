@@ -1,0 +1,32 @@
+public class Solution {
+    public int MinSetSize(int[] arr) {
+        
+            Dictionary<int, int> map = new Dictionary<int, int>();
+            int count = 0;
+            int length = arr.Length;
+            int target = length / 2;
+
+            foreach (var num in arr)
+            {
+                if (map.ContainsKey(num))
+                    map[num]++;
+                else
+                {
+                    map.Add(num, 1);
+                }
+
+            }
+
+            foreach (var entry in map.OrderByDescending(k => k.Value))
+            {
+                if (length <= target) return count;
+
+                length -= entry.Value;
+                count++;
+            }
+
+
+            return count;
+        
+    }
+}

@@ -1,0 +1,58 @@
+class Solution {
+    public int nearestExit(char[][] maze, int[] entrance) {
+
+        String start = entrance[0] + "*" + entrance[1];
+
+        int gridRow = maze.length;
+        int gridCol = maze[0].length;
+
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{entrance[0], entrance[1], 0});
+
+        int[][] directions = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        Set<String> visited = new HashSet<>();
+
+
+        while(!q.isEmpty()){
+
+            int[] current = q.poll();
+            int r = current[0];
+            int c = current[1];
+            String temp = r + "*" + c;
+
+            if(!temp.equals(start)){
+
+                if((r == 0 || c == 0) && maze[r][c] != '+'){
+                    return current[2];
+                }
+                if((r == gridRow -1 || c == gridCol-1) && maze[r][c] != '+'){
+                    return current[2];
+                }
+            }
+
+            if(maze[r][c] == '+')
+                continue;
+
+            for(var direction : directions){
+
+                int dr = r + direction[0];
+                int dc = c + direction[1];
+                String key = dr + "*" + dc;
+
+                if(dr >= 0 && dr < gridRow && dc >= 0 && dc < gridCol && !visited.contains(key)){
+
+                    q.offer(new int[]{dr, dc, current[2] + 1});
+                    visited.add(key);
+
+                }
+
+
+            }
+
+        }
+
+        return -1;
+        
+        
+    }
+}
