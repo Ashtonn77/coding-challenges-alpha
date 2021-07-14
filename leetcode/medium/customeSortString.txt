@@ -1,0 +1,46 @@
+public class Solution {
+    public string CustomSortString(string order, string str) {
+   
+        IDictionary<char, int> map = new Dictionary<char, int>();
+        StringBuilder sb = new StringBuilder();
+        
+        foreach(var ch in str){
+            
+            if(map.ContainsKey(ch))
+                map[ch]++;
+            else
+                map.Add(ch, 1);
+            
+        }
+        
+        
+        foreach(var ch in order){
+            
+            if(map.ContainsKey(ch)){
+                
+                int n = map[ch];
+                map[ch] = 0;
+                string t = new String(ch, n);
+                sb.Append(t);
+                
+            }
+            
+        }
+        
+        foreach(var ch in str){
+            
+            if(map[ch] > 0){
+                
+                int n = map[ch];
+                map[ch] = 0;
+                string t = new String(ch, n);
+                sb.Append(t);
+                
+            }
+            
+        }
+        
+        return sb.ToString();
+        
+    }
+}
