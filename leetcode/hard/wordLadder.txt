@@ -1,0 +1,58 @@
+public class Solution {
+    public int LadderLength(string beginWord, string endWord, IList<string> wordList) {
+        
+        int level = 1;
+        string alpha = "abcdefghijklmnopqrstuvwxyz";
+        IDictionary<string, bool> map = new Dictionary<string, bool>();
+        
+        foreach(var word in wordList)
+            if(!map.ContainsKey(word))
+                map.Add(word, true);
+        
+        if(!map.ContainsKey(endWord)) return 0;        
+        
+        Queue<string> q = new Queue<string>();
+        
+        q.Enqueue(beginWord);
+        
+        while(q.Count > 0){
+            
+            int size = q.Count;
+            
+            for(int i = 0; i < size; i++){
+                
+                string word = q.Dequeue();
+                char[] wordArray = word.ToCharArray();
+                
+                for(int j = 0; j < wordArray.Length; j++){
+                    
+                    char ch = wordArray[j];
+                    
+                    foreach(var x in alpha){
+                        
+                        if(x == wordArray[j]) continue;                        
+                        wordArray[j] = x;
+                        string newWord = new string(wordArray);
+                        if(newWord.Equals(endWord)) return level + 1;
+                        if(map.ContainsKey(newWord) && map[newWord]){
+                            q.Enqueue(newWord);
+                            map[newWord] = false;
+                        }
+                        
+                    }
+                                 
+                    wordArray[j] = ch;
+                    
+                }                
+                
+            }
+            
+            
+            level++;
+            
+        }
+        
+        return 0;
+        
+    }
+}
