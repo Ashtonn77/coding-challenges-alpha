@@ -1,0 +1,77 @@
+class Solution {
+
+	//Node class with depth and parent pointer
+    private class Node {
+        String value;
+        Node parent;
+        int depth;
+        Node(String value, Node parent, int depth) {
+            this.value = value;
+            this.parent = parent;
+            this.depth = depth;
+        }
+    }
+    
+    public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+        List<List<String>> wordLadders = new ArrayList<>();
+        Deque<Node> q = new ArrayDeque<>();
+        Set<String> visited = new HashSet<>();
+        Set<String> dict = new HashSet<>(wordList);
+		
+		//initialize root node with begin word
+        int minDepth = Integer.MAX_VALUE;
+        q.add(new Node(beginWord,null,0));
+        int level = 0;
+		
+		//do bfs traversal one level at a time
+        while(!q.isEmpty()) {
+            List<Node> temp = new ArrayList<>();
+            while(!q.isEmpty()) temp.add(q.poll());
+            level++;
+			
+			//if a path was found and minDepth was set, no need to go further
+            if(level > minDepth) break;
+			
+            for(Node curr : temp) {
+			
+                if(curr.value.equals(endWord)) {
+                    minDepth = curr.depth;
+                    wordLadders.add(wordLadder(curr));
+                }
+                visited.add(curr.value);
+				
+				//generate child nodes with parent pointer
+                for(String word : findWords(curr.value, dict)) {
+                    if(!visited.contains(word)) q.offer(new Node(word,curr,curr.depth+1));
+                }
+            }
+        }
+        return wordLadders;
+    }
+    
+	//find all words in wordList which are 1 letter away from our word
+    private List<String> findWords(String s, Set<String> dict) {
+        List<String> result = new ArrayList<>();
+        for(int i = 0; i < s.length(); i++) {
+            char[] c = s.toCharArray();
+            for(char x = 'a'; x <= 'z'; x++) {
+                c[i] = x;
+                String word = String.valueOf(c);
+                if(dict.contains(word)) {
+                    result.add(word);
+                }
+            }
+        }
+        return result;
+    }
+    
+	//generate word ladder by traversing tree branch in reverse
+    private List<String> wordLadder(Node curr) {
+        Deque<String> ladder = new ArrayDeque<>();
+        while(curr != null) {
+            ladder.offerFirst(curr.value);
+            curr = curr.parent;
+        }
+        return new ArrayList<>(ladder);
+    }
+}
