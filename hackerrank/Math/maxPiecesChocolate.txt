@@ -1,0 +1,7 @@
+    public static long halloweenParty(int k)
+    {
+        long x = k / 2;
+        long y = k - x;
+        
+        return x * y;
+    }
