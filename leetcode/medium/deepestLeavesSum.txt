@@ -1,0 +1,81 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+public class Solution {
+    
+    public int DeepestLeavesSum(TreeNode root) {
+      
+      int maxDepth = getMaxDepth(root);
+      return helper(root, maxDepth);
+        
+    }
+    
+    private int getMaxDepth(TreeNode root){
+        
+        if(root == null)
+            return 0;
+        
+        int left = getMaxDepth(root.left);
+        int right = getMaxDepth(root.right);
+        
+        return Math.Max(left, right) + 1;
+        
+    }
+    
+    private int helper(TreeNode root, int maxDepth){
+        
+        Queue<TreeNode> q = new Queue<TreeNode>();
+        List<int> deepestLeaves = new List<int>();
+        
+        q.Enqueue(root);
+        int level = 1;
+        
+        while(q.Count > 0){
+            
+            int size = q.Count;
+            for(int i = 0; i < size; i++){
+              
+                TreeNode current = q.Dequeue();
+                
+                if(level == maxDepth){
+                    deepestLeaves.Add(current.val);
+                }
+                
+                if(current.left != null)
+                    q.Enqueue(current.left);
+                
+                if(current.right != null)
+                    q.Enqueue(current.right);
+                
+            }
+            
+            level++;
+            
+        }
+        
+        
+        return getSum(deepestLeaves);
+        
+    }
+    
+    private int getSum(List<int> values){
+        
+        int sm = 0;
+        foreach(var value in values)
+            sm += value;
+        
+        return sm;
+    }
+    
+    
+}

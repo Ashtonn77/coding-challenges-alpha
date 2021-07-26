@@ -1,0 +1,24 @@
+public class Solution {
+    public int[] ProcessQueries(int[] queries, int m) {
+        
+        IList<int> list = new List<int>();        
+        for(int i = 1; i <= m; i++)
+            list.Add(i);
+        
+        int j = 0;
+        foreach(var query in queries){
+         
+            int k = list.IndexOf(query);
+            list.RemoveAt(k);
+            list.Insert(0, query);
+            queries[j++] = k;
+            
+        }
+        
+        
+        return queries;
+        
+    }
+
+
+}
