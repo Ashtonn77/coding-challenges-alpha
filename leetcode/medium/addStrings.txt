@@ -1,0 +1,49 @@
+public class Solution {
+    public string AddStrings(string num1, string num2) {
+        
+        int i = num1.Length - 1, j = num2.Length - 1;
+        StringBuilder answer = new StringBuilder();
+        int carry = 0;
+        int remainder = 0;
+        
+        while(i >= 0 && j >= 0){
+            
+            int x = num1[i--] - '0';
+            int y = num2[j--] - '0';
+            
+            int sum = x + y + carry;
+            carry = sum / 10;
+            remainder = sum % 10;
+            
+            answer.Append(remainder);
+            
+        }
+        
+        while(i >= 0){
+            
+            int x = num1[i--] - '0';
+            int sum = x + carry;
+            carry = sum / 10;
+            remainder = sum % 10;
+            answer.Append(remainder);
+            
+        }
+        
+        while(j >= 0){
+            
+            int x = num2[j--] - '0';
+            int sum = x + carry;
+            carry = sum / 10;
+            remainder = sum % 10;
+            answer.Append(remainder);
+            
+        }
+        
+        if(carry != 0) answer.Append(carry);
+        
+        string output = new String(answer.ToString().Reverse().ToArray());
+             
+        return output;
+        
+    }
+}
