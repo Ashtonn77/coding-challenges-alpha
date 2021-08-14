@@ -1,0 +1,72 @@
+ public boolean is_Possible(int[][] grid)
+    {
+        int rowDeadLine = grid.length;
+        int columnDeadLine = grid[0].length;
+        int[][] coords = findStartAndEnd(grid);
+        
+        
+        Map<String, Boolean> visited = new HashMap<>();
+        visited.put(coords[0][0] + "*" + coords[0][1], true);
+        
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(coords[0]);
+        
+        int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        int er = coords[1][0];
+        int ec = coords[1][1];
+        
+        while(!q.isEmpty()){
+            
+            int[] current = q.poll();
+            int cr = current[0];
+            int cc = current[1];
+            
+            if(cr == er && cc == ec) return true;
+            
+            for(var direction : directions){
+                
+                int x = cr + direction[0];
+                int y = cc + direction[1];
+                String key = x + "*" + y;
+                
+                if(x >= 0 && y >= 0 
+                && x < rowDeadLine && y < columnDeadLine
+                && !visited.containsKey(key)
+                && grid[x][y] != 0){
+                    q.offer(new int[]{x, y});
+                    visited.put(key, true);
+                }
+                
+            }
+            
+        }
+        
+        return false;
+        
+    }
+    
+    private int[][] findStartAndEnd(int[][] grid){
+        
+        int[] start = {-1, -1};
+        int[] end = {-1, -1};
+        
+        for(int i = 0; i < grid.length; i++){
+            
+            if(start[0] != -1 && end[0] != -1) break;
+            
+            for(int j = 0; j < grid[i].length; j++){
+                
+                int cur = grid[i][j];
+                if(cur == 1) start = new int[]{i, j};
+                else if(cur == 2) end = new int[]{i, j};
+            }
+            
+        }
+        
+        int[][] out = {start, end};
+        
+        return out;
+        
+    } 
+    
+}
